@@ -1,0 +1,15 @@
+sample,Group,Genotype,Condition
+Sham_oxy_1,Sham,oxy,Sham_oxy
+Sham_oxy_2,Sham,oxy,Sham_oxy
+Sham_oxy_3,Sham,oxy,Sham_oxy
+Sham_oxy_4,Sham,oxy,Sham_oxy
+Sham_Sal_1,Sham,Sal,Sham_Sal
+Sham_Sal_2,Sham,Sal,Sham_Sal
+Sham_Sal_3,Sham,Sal,Sham_Sal
+Sham_Sal_4,Sham,Sal,Sham_Sal
+SNI_oxy_1,SNI,oxy,SNI_oxy
+SNI_oxy_2,SNI,oxy,SNI_oxy
+SNI_oxy_3,SNI,oxy,SNI_oxy
+SNI_oxy_4,SNI,oxy,SNI_oxy
+SNI_Sal_1,SNI,Sal,SNI_Sal
+SNI_Sal_3,SNI,Sal,SNI_Sal
