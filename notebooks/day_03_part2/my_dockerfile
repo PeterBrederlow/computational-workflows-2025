@@ -6,6 +6,11 @@ LABEL image.author.name "yourname"
 LABEL image.author.email "yourmail"
 
 # !TODO: add the command that is run to install the dependencies for the image. In this case, it should be updating the package list and installing curl and cowsay.
+RUN apt-get update && \
+    apt-get install -y curl cowsay && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/usr/games:${PATH}"
 
 
 

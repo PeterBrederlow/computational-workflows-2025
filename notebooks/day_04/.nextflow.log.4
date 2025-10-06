@@ -1,0 +1,96 @@
+Okt.-06 11:00:52.128 [main] DEBUG nextflow.cli.Launcher - $> nextflow run advanced_channel_operations.nf --step 4
+Okt.-06 11:00:52.249 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.7
+Okt.-06 11:00:52.264 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/peterbrederlow/.nextflow/plugins; core-plugins: nf-amazon@2.15.0-patch1,nf-azure@1.16.0-patch1,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.1,nf-k8s@1.0.0,nf-tower@1.11.4-patch1,nf-wave@1.12.1
+Okt.-06 11:00:52.283 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Okt.-06 11:00:52.284 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Okt.-06 11:00:52.285 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Okt.-06 11:00:52.291 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Okt.-06 11:00:52.312 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /Users/peterbrederlow/.nextflow/secrets/store.json
+Okt.-06 11:00:52.317 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@6272c96f] - activable => nextflow.secret.LocalSecretsProvider@6272c96f
+Okt.-06 11:00:52.336 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Okt.-06 11:00:52.343 [main] DEBUG nextflow.cli.CmdRun - Launching `advanced_channel_operations.nf` [deadly_wiles] DSL2 - revision: 3d2d6a5b6b
+Okt.-06 11:00:52.344 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Okt.-06 11:00:52.344 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Okt.-06 11:00:52.370 [main] DEBUG nextflow.Session - Session UUID: 74b79a88-141d-4f30-a609-15882e89972d
+Okt.-06 11:00:52.370 [main] DEBUG nextflow.Session - Run name: deadly_wiles
+Okt.-06 11:00:52.371 [main] DEBUG nextflow.Session - Executor pool size: 11
+Okt.-06 11:00:52.374 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Okt.-06 11:00:52.377 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=33; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Okt.-06 11:00:52.392 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.7 build 5955
+  Created: 08-09-2025 13:29 UTC (15:29 MESZ)
+  System: Mac OS X 15.6.1
+  Runtime: Groovy 4.0.26 on OpenJDK 64-Bit Server VM 23.0.2+7
+  Encoding: UTF-8 (UTF-8)
+  Process: 83705@MacBook-Pro-von-Peter.local [127.0.0.1]
+  CPUs: 11 - Mem: 18 GB (61.8 MB) - Swap: 2 GB (1.5 GB)
+Okt.-06 11:00:52.399 [main] DEBUG nextflow.Session - Work-dir: /Users/peterbrederlow/Documents/Uni/MasterBioinformatik/SS25/WorkflowCourse/computational-workflows-2025/notebooks/day_04/work [Mac OS X]
+Okt.-06 11:00:52.399 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/peterbrederlow/Documents/Uni/MasterBioinformatik/SS25/WorkflowCourse/computational-workflows-2025/notebooks/day_04/bin
+Okt.-06 11:00:52.404 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Okt.-06 11:00:52.407 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Okt.-06 11:00:52.409 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Okt.-06 11:00:52.422 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Okt.-06 11:00:52.426 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 12; maxThreads: 1000
+Okt.-06 11:00:52.452 [main] DEBUG nextflow.Session - Session start
+Okt.-06 11:00:52.757 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Okt.-06 11:00:52.802 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_270d2324579b7989: /Users/peterbrederlow/Documents/Uni/MasterBioinformatik/SS25/WorkflowCourse/computational-workflows-2025/notebooks/day_04/advanced_channel_operations.nf
+Okt.-06 11:00:52.802 [main] DEBUG nextflow.Session - Session aborted -- Cause: Trying to evaluate a GString containing a Closure taking 2 parameters
+Okt.-06 11:00:52.809 [main] DEBUG nextflow.Session - The following nodes are still active:
+  [operator] splitCsv
+  [operator] map
+
+Okt.-06 11:00:52.812 [main] ERROR nextflow.cli.Launcher - @unknown
+groovy.lang.GroovyRuntimeException: Trying to evaluate a GString containing a Closure taking 2 parameters
+	at org.codehaus.groovy.runtime.GStringUtil.writeToImpl(GStringUtil.java:93)
+	at org.codehaus.groovy.runtime.GStringImpl.writeTo(GStringImpl.java:96)
+	at groovy.lang.GString.toString(GString.java:121)
+	at org.codehaus.groovy.runtime.GStringImpl.toString(GStringImpl.java:349)
+	at org.codehaus.groovy.runtime.FormatHelper.format(FormatHelper.java:194)
+	at org.codehaus.groovy.runtime.FormatHelper.format(FormatHelper.java:145)
+	at org.codehaus.groovy.runtime.FormatHelper.toString(FormatHelper.java:79)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.castToType(DefaultTypeTransformation.java:233)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.util.CheckHelper.checkParams(CheckHelper.groovy:57)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.extension.GroupTupleOp.<init>(GroupTupleOp.groovy:59)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.extension.OperatorImpl.groupTuple(OperatorImpl.groovy:230)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1333)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1088)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at groovy.lang.DelegatingMetaClass.invokeMethod(DelegatingMetaClass.java:165)
+	at nextflow.extension.OpCall.invoke1(OpCall.groovy:316)
+	at nextflow.extension.OpCall.invoke0(OpCall.groovy:302)
+	at nextflow.extension.OpCall.invoke(OpCall.groovy:162)
+	at nextflow.extension.OpCall.call(OpCall.groovy:112)
+	at nextflow.plugin.extension.PluginExtensionProvider.invokeExtensionMethod(PluginExtensionProvider.groovy:280)
+	at groovy.runtime.metaclass.NextflowDelegatingMetaClass.invokeMethod(NextflowDelegatingMetaClass.java:58)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at Script_270d2324579b7989$_runScript_closure1$_closure2.doCall(Script_270d2324579b7989:58)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:280)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at groovy.lang.Closure.call(Closure.java:433)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at nextflow.script.WorkflowDef.run0(WorkflowDef.groovy:205)
+	at nextflow.script.WorkflowDef.run(WorkflowDef.groovy:189)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:182)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:193)
+	at nextflow.script.parser.v1.ScriptLoaderV1.runScript(ScriptLoaderV1.groovy:246)
+	at nextflow.script.parser.v1.ScriptLoaderV1.runScript(ScriptLoaderV1.groovy)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:246)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:139)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:379)
+	at nextflow.cli.Launcher.run(Launcher.groovy:513)
+	at nextflow.cli.Launcher.main(Launcher.groovy:673)

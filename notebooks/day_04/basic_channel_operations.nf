@@ -7,6 +7,8 @@ workflow{
 
     if (params.step == 1) {
         in_ch = channel.of(1,2,3)
+        first_ch = in_ch.first()
+        first_ch.view()
 
     }
 
@@ -15,6 +17,8 @@ workflow{
     if (params.step == 2) {
 
         in_ch = channel.of(1,2,3)
+        last_ch = in_ch.last()
+        last_ch.view()
 
     }
 
@@ -23,6 +27,8 @@ workflow{
     if (params.step == 3) {
 
         in_ch = channel.of(1,2,3)
+        firstTwo_ch = in_ch.take(2)
+        firstTwo_ch.view()
 
 
     }
@@ -32,6 +38,8 @@ workflow{
     if (params.step == 4) {
 
         in_ch = channel.of(2,3,4)
+        sq_ch = in_ch.map (it -> it * it)
+        sq_ch.view()
 
 
     }
@@ -50,6 +58,8 @@ workflow{
     if (params.step == 6) {
         
         in_ch = channel.of('Taylor', 'Swift')
+        rev_ch = in_ch.map(it -> it.reverse())
+        rev_ch.view()
 
     }
 
@@ -57,9 +67,11 @@ workflow{
 
     if (params.step == 7) {
 
-        in_ch = channel.fromPath('files_dir/*.fq')
-
-        
+    in_ch = Channel.fromPath('files_dir/*.fq')
+    file_pairs_ch = in_ch.map { file ->
+        [file.getName(), file]   
+    }
+    file_pairs_ch.view()
     }
 
     // Task 8 - Combine the items from the two channels into a single channel
@@ -68,9 +80,8 @@ workflow{
 
         ch_1 = channel.of(1,2,3)
         ch_2 = channel.of(4,5,6)
-        out_ch = channel.of("a", "b", "c")
-
-
+        out_ch = ch_1.concat(ch_2)
+        out_ch.view()
     }
 
     // Task 9 - Flatten the channel
@@ -78,6 +89,8 @@ workflow{
     if (params.step == 9) {
 
         in_ch = channel.of([1,2,3], [4,5,6])
+        flat_ch = in_ch.flatten()
+        flat_ch.view()
 
 
     }
@@ -87,6 +100,8 @@ workflow{
     if (params.step == 10) {
 
         in_ch = channel.of(1,2,3)
+        list_ch = in_ch.toList()
+        list_ch.view()
 
     }
     
@@ -100,6 +115,9 @@ workflow{
     if (params.step == 11) {
 
         in_ch = channel.of([1, 'V'], [3, 'M'], [2, 'O'], [1, 'f'], [3, 'G'], [1, 'B'], [2, 'L'], [2, 'E'], [3, '33'])
+        // Group by the first element in each tuple (the key)
+        grouped_ch = in_ch.groupTuple()
+        grouped_ch.view()
 
     }
 
@@ -110,6 +128,9 @@ workflow{
         left_ch = channel.of([1, 'V'], [3, 'M'], [2, 'O'], [1, 'B'], [3, '33'])
         right_ch = channel.of([1, 'f'], [3, 'G'], [2, 'L'], [2, 'E'],)
 
+        joined_ch = left_ch.join(right_ch)
+        joined_ch.view()
+
     }
 
     // Task 13 - Split the input channel into two channels, one of all the even numbers and the other of all the odd numbers. Write the output of each channel to a list
@@ -117,8 +138,15 @@ workflow{
 
     if (params.step == 13) {
 
-        in_ch = channel.of(1,2,3,4,5,6,7,8,9,10)
+        
+        in_ch = channel.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
+        
+        even_ch = in_ch.filter {it % 2 == 0 }
+        odd_ch = in_ch.filter {it % 2 != 0 }
+
+        even_ch.view()
+        //odd_ch.view()
     }
 
     // Task 14 - Nextflow has the concept of maps. Write the names in the maps in this channel to a file called "names.txt". Each name should be on a new line. 
@@ -135,7 +163,9 @@ workflow{
             ['name': 'Hagrid', 'title': 'groundkeeper'],
             ['name': 'Dobby', 'title': 'hero'],
         )
-    
+        names_ch = in_ch.map { it.name }
+            .collectFile(name: 'results/names.txt', newLine:true)
+        out_ch = channel.empty()
     }
 
 

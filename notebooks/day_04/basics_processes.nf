@@ -2,11 +2,141 @@ params.step = 0
 params.zip = 'zip'
 
 
-process SAYHELLO {
-    debug true
+ process SAYHELLO {
+    echo true
+    """
+    echo "Hello World!"
+    """
+ }
+
+process SAYHELLO_PYTHON{
+            debug true
+            script:
+            """
+            #!/usr/bin/env python3
+            print("Hello World!")
+            """
+}
+
+process SAYHELLO_PARAM {
+    input:
+    val greeting_ch 
+
+    echo true
+    output: stdout
+
+    script:
+    """
+    echo "$greeting_ch"
+    """
+}
+
+process SAYHELLO_FILE{
+    input:
+    val greeting_ch 
+
+    output:
+    path "greeting.txt"
+
+    script:
+    """
+    echo "$greeting_ch" > greeting.txt
+    """
+}
+
+process UPPERCASE {
+    publishDir 'results', mode: 'copy'
+
+    input:
+    val text
+
+    output:
+    path 'uppercase.txt'
+
+    script:
+    """
+    echo "$text" | tr '[:lower:]' '[:upper:]' > uppercase.txt
+    """
 }
 
 
+process PRINTUPPER {
+    debug true
+    input:
+    path upper_file
+
+    output:
+    stdout
+
+    script:
+    """
+    echo "Content of the uppercase file:"
+    cat "$upper_file"
+    """
+}
+
+process ZIPFILE {
+    publishDir 'results', mode: 'copy'
+
+    input:
+    path file_to_zip
+    val zip_format
+
+    output:
+    path '*.*', emit: zipped_file
+
+    script:
+    """
+    if [ "$zip_format" = "zip" ]; then
+        zip file.zip "$file_to_zip"
+        echo "Zipped file path: \$(realpath file.zip)"
+    elif [ "$zip_format" = "gzip" ]; then
+        gzip -c "$file_to_zip" > file.gz
+        echo "Gzip file path: \$(realpath file.gz)"
+    elif [ "$zip_format" = "bzip2" ]; then
+        bzip2 -c "$file_to_zip" > file.bz2
+        echo "Bzip2 file path: \$(realpath file.bz2)"
+    fi
+    """
+}
+
+process ZIP_ALL {
+    publishDir 'results', mode: 'copy'
+
+    input:
+    path file_to_zip
+
+    output:
+    path '*.*', emit: zipped_files  
+
+    script:
+    """
+    # Create zip version
+    zip "${file_to_zip}.zip" "$file_to_zip"
+
+    # Create gzip version
+    gzip -c "$file_to_zip" > "${file_to_zip}.gz"
+
+    # Create bzip2 version
+    bzip2 -c "$file_to_zip" > "${file_to_zip}.bz2"
+    """
+}
+
+process WRITETOFILE {
+    publishDir 'results', mode: 'copy'
+
+    input:
+    val in_ch
+
+    output:
+    path 'names.tsv'
+
+    script:
+    def content = in_ch.collect { "${it.name}\t${it.title}" }.join("\n")
+    """
+    echo -e "name\ttitle\n${content}" > names.tsv
+    """
+}
 
 workflow {
 
@@ -51,12 +181,18 @@ workflow {
     //          Print out the path to the zipped file in the console
     if (params.step == 7) {
         greeting_ch = Channel.of("Hello world!")
+        out_ch = UPPERCASE(greeting_ch)
+        ZIPFILE(out_ch, params.zip)
+        .view { "Zipped file created at: $it" }
     }
 
     // Task 8 - Create a process that zips the file created in the UPPERCASE process in "zip", "gzip" AND "bzip2" format. Print out the paths to the zipped files in the console
 
     if (params.step == 8) {
         greeting_ch = Channel.of("Hello world!")
+        out_ch = UPPERCASE(greeting_ch)
+        ZIP_ALL(out_ch)
+        .view { "Zipped file created: $it" }
     }
 
     // Task 9 - Create a process that reads in a list of names and titles from a channel and writes them to a file.
@@ -71,11 +207,10 @@ workflow {
             ['name': 'Snape', 'title': 'teacher'],
             ['name': 'Hagrid', 'title': 'groundkeeper'],
             ['name': 'Dobby', 'title': 'hero'],
-        )
+        ).toList()
 
         in_ch
             | WRITETOFILE
-            // continue here
     }
 
 }
